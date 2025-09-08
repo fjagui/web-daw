@@ -121,7 +121,7 @@ fi
 echo -e "${GREEN}Sincronizando con repositorio remoto...${NC}"
 
 # Añadir .gitignore al staging
-git add "$GITIGNORE"
+git add .
 
 # Verificar si hay cambios para commit
 if ! git diff --cached --quiet || ! git diff --quiet; then
