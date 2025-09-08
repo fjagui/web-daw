@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Script: git-remove-from-ignore.sh
-# Descripción: Elimina entradas del .gitignore sin preguntas interactivas
+# Script: git-manage-ignore.sh
+# Descripción: Gestiona entradas en .gitignore y tracking de Git
 
 set -e  # Salir inmediatamente si algún comando falla
 
@@ -22,18 +22,29 @@ show_help() {
     echo -e "${YELLOW}Nota: Usa comillas para patrones con asteriscos${NC}"
 }
 
+# Función para verificar si está en .gitignore
+is_in_gitignore() {
+    local target="$1"
+    if grep -q "^$target$" "$GITIGNORE" 2>/dev/null || 
+       grep -q "^/$target$" "$GITIGNORE" 2>/dev/null || 
+       grep -q "^$target/$" "$GITIGNORE" 2>/dev/null; then
+        return 0
+    else
+        return 1
+    fi
+}
+
 # Función para eliminar entrada del .gitignore
 remove_from_gitignore() {
     local target="$1"
     local temp_file=$(mktemp)
     
-    # Eliminar la línea exacta y líneas relacionadas
+    # Eliminar todas las variantes de la entrada
     grep -v "^$target$" "$GITIGNORE" | \
     grep -v "^/$target$" | \
     grep -v "^$target/$" | \
     grep -v "/$target$" > "$temp_file"
     
-    # Mover el archivo temporal al original
     mv "$temp_file" "$GITIGNORE"
 }
 
@@ -45,6 +56,8 @@ fi
 
 TARGET="$1"
 GITIGNORE=".gitignore"
+ACTION=""
+COMMIT_MESSAGE=""
 
 # Verificar que estamos en un repositorio Git
 if ! git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
@@ -52,40 +65,80 @@ if ! git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
     exit 1
 fi
 
-# Verificar si el .gitignore existe
+# Verificar si el .gitignore existe, si no crearlo
 if [ ! -f "$GITIGNORE" ]; then
-    echo -e "${YELLOW}El archivo $GITIGNORE no existe. Nada que eliminar.${NC}"
-    exit 0
+    touch "$GITIGNORE"
 fi
 
-# Paso 1: Verificar si está en .gitignore
+# Paso 1: Verificar si ya está en .gitignore
 echo -e "${GREEN}Verificando '$TARGET' en $GITIGNORE...${NC}"
 
-FOUND_ENTRIES=$(grep -n "$TARGET" "$GITIGNORE" 2>/dev/null | wc -l)
+if is_in_gitignore "$TARGET"; then
+    echo -e "${YELLOW}✓ '$TARGET' está en $GITIGNORE - ELIMINANDO${NC}"
+    ACTION="remove"
+else
+    echo -e "${YELLOW}✗ '$TARGET' no está en $GITIGNORE - AÑADIENDO${NC}"
+    ACTION="add"
+fi
 
-if [ "$FOUND_ENTRIES" -gt 0 ]; then
-    echo -e "${YELLOW}✓ Se encontraron $FOUND_ENTRIES entradas para '$TARGET'${NC}"
-    
-    # Mostrar las entradas que se eliminarán
-    echo -e "${BLUE}Entradas a eliminar:${NC}"
-    grep -n "$TARGET" "$GITIGNORE"
-    
-    # Eliminar las entradas
-    remove_from_gitignore "$TARGET"
-    
-    echo -e "${GREEN}✓ Entradas de '$TARGET' eliminadas de $GITIGNORE${NC}"
-    
-    # Mostrar contenido actualizado
-    echo -e "${BLUE}Contenido actualizado de $GITIGNORE:${NC}"
-    if [ -s "$GITIGNORE" ]; then
-        cat -n "$GITIGNORE"
-    else
-        echo -e "${YELLOW}(archivo vacío)${NC}"
-    fi
+# Paso 2: Ejecutar la acción correspondiente
+if [ "$ACTION" = "add" ]; then
+    # Añadir al .gitignore
+    echo -e "${GREEN}Añadiendo '$TARGET' al $GITIGNORE...${NC}"
+    echo "" >> "$GITIGNORE"
+    echo "# Añadido automáticamente $(date '+%Y-%m-%d %H:%M:%S')" >> "$GITIGNORE"
+    echo "$TARGET" >> "$GITIGNORE"
+    echo -e "${GREEN}✓ '$TARGET' añadido a $GITIGNORE${NC}"
+    COMMIT_MESSAGE="Añadir $TARGET al .gitignore"
     
 else
-    echo -e "${YELLOW}✗ No se encontraron entradas para '$TARGET' en $GITIGNORE${NC}"
-    echo -e "${GREEN}✓ Nada que hacer${NC}"
+    # Eliminar del .gitignore
+    echo -e "${GREEN}Eliminando '$TARGET' de $GITIGNORE...${NC}"
+    remove_from_gitignore "$TARGET"
+    echo -e "${GREEN}✓ '$TARGET' eliminado de $GITIGNORE${NC}"
+    COMMIT_MESSAGE="Eliminar $TARGET del .gitignore"
 fi
+
+# Paso 3: Gestionar el tracking de Git
+echo -e "${GREEN}Gestionando tracking de '$TARGET'...${NC}"
+
+if git ls-files --error-unmatch "$TARGET" > /dev/null 2>&1; then
+    echo -e "${YELLOW}✓ '$TARGET' está siendo trackeado - ELIMINANDO${NC}"
+    git rm --cached -r "$TARGET"
+    echo -e "${GREEN}✓ '$TARGET' eliminado del tracking${NC}"
+    
+    # Actualizar mensaje de commit si también se modificó el tracking
+    if [ "$ACTION" = "add" ]; then
+        COMMIT_MESSAGE="Añadir $TARGET al .gitignore y eliminar del tracking"
+    else
+        COMMIT_MESSAGE="Eliminar $TARGET del .gitignore y del tracking"
+    fi
+else
+    echo -e "${YELLOW}✗ '$TARGET' no está siendo trackeado${NC}"
+fi
+
+# Paso 4: Hacer commit y push automáticamente
+echo -e "${GREEN}Sincronizando con repositorio remoto...${NC}"
+
+# Añadir .gitignore al staging
+git add "$GITIGNORE"
+
+# Verificar si hay cambios para commit
+if ! git diff --cached --quiet || ! git diff --quiet; then
+    git commit -m "$COMMIT_MESSAGE"
+    echo -e "${GREEN}✓ Commit realizado: $COMMIT_MESSAGE${NC}"
+    
+    # Hacer push al repositorio remoto
+    git push
+    echo -e "${GREEN}✓ Push realizado${NC}"
+else
+    echo -e "${YELLOW}No hay cambios para commit${NC}"
+fi
+
+# Paso 5: Mostrar estado final
+echo -e "\n${BLUE}=== RESULTADO FINAL ===${NC}"
+echo -e "${GREEN}Acción realizada: ${NC}$ACTION"
+echo -e "${GREEN}En .gitignore: ${NC}$(is_in_gitignore "$TARGET" && echo "✓ PRESENTE" || echo "✗ AUSENTE")"
+echo -e "${GREEN}En tracking Git: ${NC}$(git ls-files --error-unmatch "$TARGET" >/dev/null 2>&1 && echo "✓ TRACKEADO" || echo "✗ NO TRACKEADO")"
 
 echo -e "\n${GREEN}✅ Proceso completado!${NC}"
