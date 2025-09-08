@@ -1,4 +1,7 @@
 site_name: Despliegue de Aplicaciones Web.
+site_url: https://fjagui.github.io/web-daw/
+repo_url: https://github.com/fjagui/web-daw/
+repo_name: TU-REPO
 theme:
   name: material
   language: es
