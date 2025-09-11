@@ -14,7 +14,7 @@ theme:
 nav:
   - Inicio: index.md
   - Unidad 1: 
-      - Teoría: UD1/index.md
+      - Teoría: docs/UD1/index.md
       - Actividades: UD1/practicas.md
       - RA y CE: UD1/ra.md
   - Unidad 2: 
