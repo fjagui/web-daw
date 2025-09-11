@@ -148,6 +148,45 @@ La tendencia actual se dirige hacia arquitecturas híbridas que combinan lo mejo
 ### Servidores
 - Servidores web: instalación y configuración básica.
 - Servidores de aplicaciones: instalación y configuración básica.
+### Servidores
+
+#### 1. Introducción a los Servidores Web y de Aplicaciones
+
+En el contexto del despliegue de aplicaciones web, los servidores son componentes fundamentales que proporcionan los servicios necesarios para que las aplicaciones estén disponibles para los usuarios. Se distinguen principalmente dos tipos:
+
+- **Servidores Web**: Gestionan peticiones HTTP/HTTPS y sirven contenido estático
+- **Servidores de Aplicaciones**: Ejecutan la lógica de negocio y procesan contenido dinámico
+
+#### 2. Servidores Web: Instalación y Configuración Básica
+
+##### a) Concepto y Funcionalidad
+
+Los servidores web son software diseñado para servir contenido a través del protocolo HTTP/HTTPS. Su función principal es recibir peticiones de clientes (navegadores) y devolver respuestas, que pueden ser:
+
+- Archivos estáticos (HTML, CSS, JavaScript, imágenes)
+- Contenido dinámico mediante integración con servidores de aplicaciones
+- Redirecciones y reescrituras de URL
+
+##### b) Principales Servidores Web
+
+**Apache HTTP Server:**
+- Software libre y de código abierto
+- Módulos extensibles (mod_rewrite, mod_security, mod_ssl)
+- Amplia documentación y comunidad
+- Configuración mediante archivos .htaccess
+
+**Nginx:**
+- Alto rendimiento y bajo consumo de recursos
+- Arquitectura orientada a eventos
+- Ideal para servir contenido estático y como proxy inverso
+- Configuración centralizada
+
+**Microsoft IIS:**
+- Integrado con el ecosistema Microsoft
+- Soporte nativo para ASP.NET
+- Interfaz gráfica de administración
+
+
 
 ### Virtualización
 - Tecnologías de virtualización en la nube.
