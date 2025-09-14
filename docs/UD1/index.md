@@ -1,13 +1,7 @@
-# Implantación de arquitecturas web
-
-## Contenidos básicos agrupados
-
-### Arquitecturas web
+# Implantación de arquitecturas web.
+## 1. Arquitecturas web
 - Modelos, características, ventajas e inconvenientes.
-### Arquitecturas web. Modelos, características, ventajas e inconvenientes
-
-#### 1. Introducción a la Arquitectura Web
-
+### 1.1. Introducción.
 La arquitectura web es el esquema estructural y lógico que define cómo interactúan los diferentes componentes de una aplicación web (frontend, backend, bases de datos, servidores, etc.) para procesar una petición de usuario y entregar una respuesta.
 
 La elección de una arquitectura adecuada es fundamental, ya que determina aspectos críticos del proyecto:
@@ -20,213 +14,263 @@ La elección de una arquitectura adecuada es fundamental, ya que determina aspec
 
 A lo largo del tiempo, las arquitecturas han evolucionado desde modelos monolíticos simples hasta sistemas distribuidos y desacoplados complejos, impulsados por la necesidad de satisfacer demandas modernas.
 
-#### 2. Modelos de Arquitectura
-
-##### a) Arquitectura Monolítica
-
+### 1.2. Modelos de arquitecturas web.
+#### a) Arquitectura monolítica.
 Es el modelo tradicional donde todos los componentes de la aplicación (interfaz de usuario, lógica de negocio, capa de acceso a datos) están acoplados en un único programa o proyecto y se despliegan como una sola unidad.
 
-**Características:**
-- Código único y base de código unificada
-- Desarrollo, testing y despliegue simplificados al principio
-- Comunicación entre componentes mediante llamadas a funciones o métodos internos (muy rápida)
-- Generalmente, una única base de datos
+**Características:**   
 
-**Ventajas:**
-- ✅ **Simplicidad inicial:** Fácil de desarrollar, probar y desplegar
-- ✅ **Desarrollo ágil:** Ideal para proyectos pequeños o MVPs (Producto Mínimo Viable)
-- ✅ **Comunicación eficiente:** Al estar todo en el mismo proceso, la comunicación es directa y rápida
+- Código único y base de código unificada.  
+- Desarrollo, testing y despliegue  implificados al principio.   
+- Comunicación entre componentes mediante llamadas a funciones o métodos internos (muy rápida).  
+- Generalmente, una única base de datos.  
 
-**Inconvenientes:**
-- ❌ **Acoplamiento fuerte:** Un cambio pequeño puede requerir redeploy de toda la aplicación
-- ❌ **Escalabilidad limitada:** Para escalar, se debe duplicar la aplicación completa
-- ❌ **Barrera tecnológica:** Dificulta la adopción de nuevas tecnologías o frameworks
-- ❌ **Baja fiabilidad:** Un fallo en un módulo pequeño puede tumbar toda la aplicación
+**Ventajas:**  
 
-**Caso de uso ideal:** Aplicaciones pequeñas, con poca carga, equipos de desarrollo reducidos y tiempo de salida al mercado crítico.
+- **Simplicidad inicial:** Fácil de desarrollar, probar y desplegar.  
+- **Desarrollo ágil:** Ideal para proyectos pequeños o MVPs (Producto Mínimo Viable).
+- **Comunicación eficiente:** Al estar todo en el mismo proceso, la comunicación es directa y rápida.  
 
-##### b) Arquitectura de 2 Capas (Cliente-Servidor)
+**Inconvenientes:**  
+
+- **Acoplamiento fuerte:** Un cambio pequeño puede requerir redeploy de toda la aplicación.  
+- **Escalabilidad limitada:** Para escalar, se debe duplicar la aplicación completa.  
+- **Barrera tecnológica:** Dificulta la adopción de nuevas tecnologías o frameworks.  
+- **Baja fiabilidad:** Un fallo en un módulo pequeño puede afectar a toda la aplicación.  
+
+**Caso de uso ideal:** Aplicaciones pequeñas, con poca carga, equipos de desarrollo reducidos y tiempo de salida al mercado crítico.  
+
+#### b) Arquitectura de 2 Capas (Cliente-Servidor).
 
 Es el modelo clásico donde las responsabilidades se separan en dos partes claramente diferenciadas:
 
-1. **Cliente ("Frontend"):** Solicita y presenta la información al usuario
-2. **Servidor ("Backend"):** Procesa las peticiones, ejecuta la lógica de negocio y gestiona el acceso a los datos
+1. **Cliente ("Frontend"):** Solicita y presenta la información al usuario.
+2. **Servidor ("Backend"):** Procesa las peticiones, ejecuta la lógica de negocio y gestiona el acceso a los datos.  
 
-**Características:**
-- Separación clara de responsabilidades
-- El servidor suele albergar tanto la lógica de negocio como la base de datos
+**Características:**  
 
-**Ventajas:**
-- ✅ **Mejor organización** que un monolito puro
-- ✅ **Centralización:** La gestión y la seguridad son más fáciles de aplicar en el servidor
+- Separación clara de responsabilidades.  
+- El servidor suele albergar tanto la lógica de negocio como la base de datos.  
 
-**Inconvenientes:**
-- ❌ El servidor puede convertirse en un cuello de botella
-- ❌ La escalabilidad sigue siendo un desafío
+**Ventajas:**  
 
-##### c) Arquitectura de 3 Capas / N-Capas
+- **Mejor organización** que una arquitectura monolítica pura.  
+- **Centralización:** La gestión y la seguridad son más fáciles de aplicar en el servidor.  
+
+**Inconvenientes:** 
+
+- El servidor puede convertirse en un cuello de botella.  
+- La escalabilidad sigue siendo un desafío.  
+
+#### c) Arquitectura de 3 Capas / N-Capas
 
 Este modelo divide la aplicación en tres capas lógicas y físicas independientes:
 
-1. **Capa de Presentación (Frontend):** Interfaz de usuario que interactúa con el cliente
-2. **Capa de Lógica de Negocio (Backend/Aplicación):** Contiene las reglas y procesos del negocio
-3. **Capa de Datos (Base de Datos):** Almacena, recupera y gestiona la información
+1. **Capa de Presentación (Frontend):** Interfaz de usuario que interactúa con el cliente.  
+2. **Capa de Lógica de Negocio (Backend/Aplicación):** Contiene las reglas y procesos del negocio.  
+3. **Capa de Datos (Base de Datos):** Almacena, recupera y gestiona la información.  
 
-**Características:**
-- Desacoplamiento total entre la presentación, la lógica y los datos
-- Cada capa puede ser desarrollada, escalada y actualizada de forma independiente
+**Características:**  
 
-**Ventajas:**
-- ✅ **Alta escalabilidad:** Cada capa puede escalarse por separado
-- ✅ **Mantenibilidad:** Los cambios en una capa no afectan a las otras
-- ✅ **Mayor seguridad:** Es más fácil aplicar políticas de seguridad entre capas
-- ✅ **Flexibilidad tecnológica:** Se pueden usar diferentes tecnologías en cada capa
+- Desacoplamiento total entre la presentación, la lógica y los datos.    
+- Cada capa puede ser desarrollada, escalada y actualizada de forma independiente.  
 
-**Inconvenientes:**
-- ❌ **Complejidad aumentada:** Mayor overhead en desarrollo y configuración
-- ❌ **Latencia:** La comunicación entre capas introduce latencia
+**Ventajas:** 
+
+- **Alta escalabilidad:** Cada capa puede escalarse por separado.  
+- **Mantenibilidad:** Los cambios en una capa no afectan a las otras.  
+- **Mayor seguridad:** Es más fácil aplicar políticas de seguridad entre capas.  
+- **Flexibilidad tecnológica:** Se pueden usar diferentes tecnologías en cada capa.  
+
+**Inconvenientes:**  
+  
+- **Complejidad aumentada:** Mayor sobrecarga de trabajo en el desarrollo, configuración y despliegue.  
+- **Latencia:** La comunicación entre capas introduce latencia.
 
 **Caso de uso ideal:** Aplicaciones empresariales medianas y grandes.
 
-##### d) Arquitectura Microservicios
+#### d) Arquitectura Microservicios
 
 Evolución natural de la arquitectura de N-Capas, donde una aplicación se compone de un conjunto de servicios pequeños, independientes y altamente desacoplados.
 
-**Características:**
-- **Servicios independientes:** Cada microservicio tiene su propia base de datos
-- **Fuerte desacoplamiento:** Fallos en un servicio no afectan a los demás
-- **Gobernanza descentralizada:** Cada equipo puede elegir la tecnología más adecuada
-- **Comunicación via API:** HTTP/REST, mensajes asíncronos
+**Características:**  
 
-**Ventajas:**
-- ✅ **Escalabilidad granular:** Se escala solo el servicio que lo necesita
-- ✅ **Alta disponibilidad:** Un fallo está aislado en un servicio
-- ✅ **Libertad tecnológica:** Elección de mejores herramientas para cada problema
-- ✅ **Despliegues independientes:** Se puede desplegar un servicio sin afectar al resto
+- **Servicios independientes:** Cada microservicio tiene control de sus datos.  
+- **Fuerte desacoplamiento:** Fallos en un servicio no afectan a los demás.  
+- **Gobernanza descentralizada:** Cada equipo puede elegir la tecnología más adecuada para su desarrollo.  
+- **Comunicación via API:** HTTP/REST, mensajes asíncronos.   
 
-**Inconvenientes:**
-- ❌ **Alta complejidad operativa:** Requiere orquestación de contenedores y monitorización
-- ❌ **Overhead en la comunicación:** La latencia de red añade complejidad
-- ❌ **Consistencia de datos eventual:** Difícil mantener transacciones ACID entre servicios
-- ❌ **Mayor demanda de recursos:** Mayor consumo de memoria y CPU
+**Ventajas:**  
+
+- **Escalabilidad granular:** Se escala solo el servicio que lo necesita. 
+- **Alta disponibilidad:** Un fallo está aislado en un servicio.   
+- **Libertad tecnológica:** Elección de mejores herramientas para cada problema.  
+- **Despliegues independientes:** Se puede desplegar un servicio sin afectar al resto.  
+
+**Inconvenientes:**  
+
+- **Alta complejidad operativa:** Requiere orquestación de contenedores y monitorización.  
+- **Overhead en la comunicación:** La latencia de red añade complejidad.   
+- **Consistencia de datos eventual:** Difícil mantener transacciones [ACID](https://es.wikipedia.org/wiki/ACID){target=blank} entre servicios. 
+
+
+- **Mayor demanda de recursos:** Mayor consumo de memoria y CPU.  
 
 **Caso de uso ideal:** Sistemas grandes y complejos con equipos numerosos.
 
-##### e) Arquitectura Serverless (Sin Servidor)
+#### e) Arquitectura Serverless (Sin Servidor)
 
 Modelo donde el desarrollador no gestiona servidores. Se escribe código en forma de funciones que se ejecutan en respuesta a eventos.
 
 **Características:**
-- **Abstracción total del servidor:** No hay que aprovisionar o mantener servidores
-- **Ejecución dirigida por eventos:** El código se activa solo cuando es necesario
-- **Escalado automático y elástico:** De cero a miles de instancias de forma automática
-- **Pago por uso:** Solo se paga por el tiempo de computación consumido
+
+- **Abstracción total del servidor:** No hay que aprovisionar o mantener servidores.
+- **Ejecución dirigida por eventos:** El código se activa solo cuando es necesario.
+- **Escalado automático y elástico:** De cero a miles de instancias de forma automática.
+- **Pago por uso:** Solo se paga por el tiempo de computación consumido.
 
 **Ventajas:**
-- ✅ **Máxima escalabilidad:** Escalado automático e inherente
-- ✅ **Reducción de costes operativos:** No hay costes por servidor inactivo
-- ✅ **Enfoque en el código:** El equipo se centra únicamente en la lógica de negocio
-- ✅ **Alta disponibilidad:** Los proveedores la ofrecen por defecto
 
-**Inconvenientes:**
-- ❌ **Vendor lock-in:** Alta dependencia del proveedor cloud
-- ❌ **Cold starts:** La primera invocación puede tener latencia
-- ❌ **Depuración compleja:** Es más difícil debuggear funciones distribuidas
-- ❌ **Limitaciones de tiempo y recursos:** Tiempos de ejecución máximos
+- **Máxima escalabilidad:** Escalado automático e inherente.
+- **Reducción de costes operativos:** No hay costes por servidor inactivo.
+- **Enfoque en el código:** El equipo se centra únicamente en la lógica de negocio.
+- **Alta disponibilidad:** Los proveedores la ofrecen por defecto.
+
+**Inconvenientes:**  
+
+- **Vendor lock-in:** Alta dependencia del proveedor cloud.
+- **Cold starts:** La primera invocación puede tener latencia.
+- **Depuración compleja:** Es más difícil debuggear funciones distribuidas.
+- **Limitaciones de tiempo y recursos:** Tiempos de ejecución máximos
 
 **Caso de uso ideal:** APIs backend, procesamiento de datos en tiempo real, tareas asíncronas.
-
-#### 3. Conclusión y Tendencias
 
 No existe una arquitectura "mejor" universalmente. La elección depende de factores como la complejidad del proyecto, el tamaño del equipo, los requisitos de escalabilidad, el presupuesto y el tiempo de entrega.
 
 - **Monolito:** Comienza simple. Válido para muchos proyectos
 - **Microservicios:** Adóptalo cuando la complejidad del monolito sea insostenible
-- **Serverless:** Ideal para lógica event-driven y para descargar la gestión de infraestructura
+- **Serverless:** Ideal para [lógica event-driven](https://www.itmastersmag.com/innovacion-emprendimiento/que-es-la-arquitectura-event-driven-y-como-pueden-aprovecharla-las-organizaciones/){target=blank} y para descargar la gestión de infraestructura
 
 La tendencia actual se dirige hacia arquitecturas híbridas que combinan lo mejor de cada modelo y hacia el uso de **contenedores** (Docker) y **orquestadores** (Kubernetes) como estándar para empaquetar, desplegar y gestionar aplicaciones modernas.
-### Servidores
-- Servidores web: instalación y configuración básica.
-- Servidores de aplicaciones: instalación y configuración básica.
-### Servidores
 
-#### 1. Introducción a los Servidores Web y de Aplicaciones
+## 2. Servidores Web. Servidores de Aplicaciones
 
-En el contexto del despliegue de aplicaciones web, los servidores son componentes fundamentales que proporcionan los servicios necesarios para que las aplicaciones estén disponibles para los usuarios. Se distinguen principalmente dos tipos:
+### 2.1. Introducción
 
-- **Servidores Web**: Gestionan peticiones HTTP/HTTPS y sirven contenido estático
-- **Servidores de Aplicaciones**: Ejecutan la lógica de negocio y procesan contenido dinámico
+En el contexto de despliegue de aplicaciones web, los **servidores** son componentes software esenciales que permiten que los usuarios accedan a los recursos y funcionalidades de una aplicación web.
 
-En los años 2000 era común hablar de "Application Servers" (ej. JBoss, WebSphere, GlassFish, Tomcat en Java), que ofrecían todo en un mismo paquete:
+Tradicionalmente se distinguen dos tipos principales:
 
-Motor de ejecución de la aplicación
+- **Servidores Web**: gestionan peticiones HTTP/HTTPS y sirven principalmente contenido estático.  
+- **Servidores de Aplicaciones**: ejecutan la lógica de negocio y generan contenido dinámico.  
 
-Gestión de sesiones
+En la década de 2000 era habitual hablar de *Application Servers* (ej.: JBoss, WebSphere, GlassFish, Tomcat en Java), que ofrecían en un solo paquete tanto el servidor web como los servicios de ejecución de la aplicación. Estos servidores eran pesados y monolíticos.  
 
-Seguridad
+Con el tiempo, el enfoque moderno evolucionó hacia una **separación de responsabilidades**, donde cada componente cumple un rol específico:  
 
-Conexión a bases de datos
+- **Servidor web** (Nginx, Apache, Caddy): sirve archivos estáticos, balancea carga, maneja TLS.  
+- **Servidor de aplicaciones ligero** (Gunicorn, Uvicorn, PHP-FPM, RoadRunner): se encarga de ejecutar el código de la aplicación.  
+- **Servicios externos especializados**: bases de datos, colas de mensajería (RabbitMQ, Kafka), sistemas de caché (Redis), etc.  
 
-Servicios de mensajería, etc.
+Esto hace que el término "servidor de aplicaciones" en su sentido clásico haya perdido protagonismo. Hoy se habla más de *application runtimes* o servidores ligeros embebidos.  
 
-En ese modelo, el servidor de aplicaciones era pesado y monolítico.
+En **Java**, todavía existen servidores tradicionales (WildFly, WebLogic), aunque muchas aplicaciones migraron a marcos como Spring Boot, que incluyen servidores embebidos (Tomcat, Jetty).  
+En **Python, PHP o Node.js**, el modelo predominante es un proceso de aplicación acompañado de un servidor web que actúa como proxy inverso.  
 
-🔹 Ahora
+En resumen, los **servidores de aplicaciones no han desaparecido**, pero ya no se usan como piezas centralizadas y monolíticas, sino como parte de arquitecturas más distribuidas y flexibles.  
 
-El enfoque moderno tiende a separar responsabilidades:
+### 2.2 Servidores Web
 
-Servidor web (Nginx, Apache, Caddy) → Sirve archivos estáticos, balancea carga, maneja TLS.
+#### a) Concepto y Funcionalidad
 
-Servidor de aplicaciones ligero (Gunicorn, Uvicorn, PHP-FPM, RoadRunner) → Solo ejecuta la aplicación.
+Un **servidor web** es un software diseñado para recibir peticiones de clientes (navegadores, dispositivos, servicios) a través de HTTP/HTTPS y devolver respuestas. Estas respuestas pueden incluir:  
 
-Servicios externos especializados → Bases de datos, colas (RabbitMQ, Kafka), caché (Redis), etc.
+- Archivos estáticos (HTML, CSS, JavaScript, imágenes).  
+- Contenido dinámico generado en colaboración con un servidor de aplicaciones.  
+- Reglas de redirección o reescritura de URL.  
 
-Esto hace que hoy casi no se hable de "servidor de aplicaciones" como concepto clásico, sino de "application runtime" o "application server lightweight".
+Además, los servidores web suelen cumplir funciones de seguridad (TLS/SSL), balanceo de carga y proxy inverso.  
 
-🔹 Conclusión
+#### b) Principales Servidores Web
 
-👉 No han desaparecido, pero ya no se usan de la misma forma centralizada de antes.
+**Apache HTTP Server**  
 
-En Java todavía existen servidores de aplicaciones tradicionales (WildFly, WebLogic), aunque muchos migraron a Spring Boot (que incluye un servidor embebido como Tomcat/Jetty).
+- Software libre y de código abierto.  
+- Sistema modular (mod_rewrite, mod_security, mod_ssl).  
+- Amplia documentación y comunidad activa.  
+- Configuración flexible mediante archivos `.htaccess`.  
 
-En Python/PHP/Node.js se prefiere el modelo ligero: un proceso que corre la app + un reverse proxy delante.
-#### 2. Servidores Web: Instalación y Configuración Básica
+**Nginx**   
 
-##### a) Concepto y Funcionalidad
+- Alto rendimiento y bajo consumo de recursos.  
+- Arquitectura orientada a eventos.  
+- Ideal para servir contenido estático y actuar como proxy inverso.  
+- Configuración centralizada y ligera.  
 
-Los servidores web son software diseñado para servir contenido a través del protocolo HTTP/HTTPS. Su función principal es recibir peticiones de clientes (navegadores) y devolver respuestas, que pueden ser:
+**Microsoft IIS**   
 
-- Archivos estáticos (HTML, CSS, JavaScript, imágenes)
-- Contenido dinámico mediante integración con servidores de aplicaciones
-- Redirecciones y reescrituras de URL
+- Integrado en el ecosistema Microsoft.  
+- Soporte nativo para aplicaciones ASP.NET.  
+- Administración mediante interfaz gráfica y herramientas de Windows.  
 
-##### b) Principales Servidores Web
+### 2.3. Servidores de Aplicaciones
 
-**Apache HTTP Server:**
-- Software libre y de código abierto
-- Módulos extensibles (mod_rewrite, mod_security, mod_ssl)
-- Amplia documentación y comunidad
-- Configuración mediante archivos .htaccess
+#### a) Concepto y Funcionalidad
 
-**Nginx:**
-- Alto rendimiento y bajo consumo de recursos
-- Arquitectura orientada a eventos
-- Ideal para servir contenido estático y como proxy inverso
-- Configuración centralizada
+Un **servidor de aplicaciones** es un componente software diseñado para ejecutar la lógica de negocio de una aplicación web, procesando peticiones dinámicas y conectando con servicios externos (bases de datos, colas de mensajes, APIs).  
 
-**Microsoft IIS:**
-- Integrado con el ecosistema Microsoft
-- Soporte nativo para ASP.NET
-- Interfaz gráfica de administración
+A diferencia del servidor web, que se centra en entregar contenido, el servidor de aplicaciones:  
+
+- Procesa reglas de negocio.  
+- Ejecuta código en distintos lenguajes (Java, Python, PHP, Node.js, etc.).  
+- Maneja conexiones con bases de datos y servicios externos.  
+- Escala horizontalmente mediante múltiples instancias.  
+
+#### b) Modelos de Servidores de Aplicaciones
+
+**Tradicionales (monolíticos)**    
+
+   Los **servidores de aplicaciones tradicionales o monolíticos** constituyen plataformas integrales diseñadas para ejecutar aplicaciones empresariales en un entorno centralizado. Se caracterizan por incluir en un mismo sistema un servidor web, un motor de ejecución, un sistema de mensajería y servicios avanzados de gestión de transacciones, lo que permitía a las organizaciones disponer de una infraestructura unificada y estandarizada. Este enfoque ofrecía ventajas significativas en términos de robustez, consistencia y soporte a arquitecturas distribuidas complejas, especialmente en los grandes sistemas corporativos de principios de los 2000. Sin embargo, también presentaba limitaciones relacionadas con la rigidez, el elevado consumo de recursos y la dificultad de escalar de forma granular. Entre los ejemplos más representativos de este modelo destacan **JBoss/WildFly, WebLogic, WebSphere y GlassFish**, ampliamente utilizados en el ecosistema Java empresarial de aquella época. No obstante, conviene señalar que algunos de estos productos, en particular **Oracle WebLogic**, siguen siendo mantenidos y evolucionados, incorporando compatibilidad con **Jakarta EE**, soporte para **contenedores y Kubernetes** y despliegue en la nube, lo que garantiza su continuidad y relevancia en determinados entornos corporativos.
+
+**Ligeros o embebidos**   
+
+Los **servidores de aplicaciones ligeros o embebidos** representan un modelo más moderno y flexible que contrasta con los tradicionales monolíticos. En este enfoque, el propio **runtime o framework** incluye un servidor HTTP integrado, eliminando la necesidad de un contenedor de aplicaciones pesado. Este modelo permite desplegar aplicaciones como procesos autónomos, que pueden ejecutarse en entornos de microservicios, contenedores o directamente en la nube, con mayor agilidad y menor consumo de recursos. Entre sus principales ventajas se encuentran la **simplicidad de configuración**, la **rapidez en el arranque**, la **adaptación natural a arquitecturas distribuidas** y la **facilidad de escalado horizontal**. Ejemplos habituales son **Node.js**, que incorpora su propio servidor HTTP nativo, **Go** con el paquete estándar `net/http`, o entornos como **Spring Boot** en Java y **Uvicorn** o **Gunicorn** en Python, que proporcionan servidores embebidos compatibles con WSGI/ASGI. Gracias a estas características, los servidores embebidos se han consolidado como la base tecnológica de gran parte de las aplicaciones y plataformas modernas en la nube.
+
+---
+
+| Característica                  | Tradicionales / Monolíticos                           | Ligeros / Embebidos (Modernos)                  |
+|---------------------------------|-------------------------------------------------------|------------------------------------------------|
+| **Modelo de ejecución**         | Entorno integral que combina servidor web, motor de ejecución, mensajería y gestión de transacciones en un mismo sistema | El runtime o framework incluye un servidor HTTP embebido, ejecutándose como proceso autónomo |
+| **Ejemplos**                    | JBoss/WildFly, WebLogic, WebSphere, GlassFish         | Node.js, Go (`net/http`), Spring Boot, Uvicorn, Gunicorn |
+| **Ventajas**                    | Robustez, consistencia, soporte avanzado para arquitecturas distribuidas complejas | Ligereza, simplicidad, rapidez en el arranque, adaptación natural a microservicios y contenedores |
+| **Limitaciones**                | Rigidez, consumo elevado de recursos, dificultad de escalado granular | Menor cobertura de servicios integrados (mensajería, transacciones complejas), más dependencia de librerías externas |
+| **Situación actual**            | Algunos siguen vigentes (ej. Oracle WebLogic con soporte para Jakarta EE, contenedores y Kubernetes) | Constituyen la base tecnológica de gran parte de las aplicaciones modernas en la nube |
+| **Escalabilidad**               | Vertical (requiere más hardware y configuración compleja) | Horizontal (escalar procesos ligeros de forma sencilla en contenedores o clusters) |
+
+#### c) Tendencias Actuales
+En la actualidad, los servidores de aplicaciones tienden a ser más ligeros y modulares, adaptándose a entornos basados en **contenedores** (Docker, Kubernetes) que permiten desplegar aplicaciones de manera aislada y escalable. Asimismo, se populariza el uso de **runtimes especializados** en lenguajes modernos (como Deno o Bun) que optimizan el rendimiento y la simplicidad del desarrollo. Finalmente, las arquitecturas orientadas a **microservicios** y modelos **serverless** están transformando el panorama, al distribuir la lógica de negocio en múltiples servicios pequeños o incluso en funciones sin servidor (AWS Lambda, Azure Functions), lo que aporta mayor flexibilidad y eficiencia en la gestión de aplicaciones.
 
 
+### 2.4. Comparativa entre Servidores Web y Servidores de Aplicaciones
 
-### Virtualización
+| Característica                | Servidores Web                              | Servidores de Aplicaciones                          |
+|-------------------------------|---------------------------------------------|----------------------------------------------------|
+| **Función principal**         | Entregar contenido estático y gestionar HTTP/HTTPS | Ejecutar lógica de negocio y generar contenido dinámico |
+| **Ejemplos**                  | Apache, Nginx, IIS                          | WildFly, WebLogic, Tomcat, Gunicorn, Uvicorn       |
+| **Contenido servido**         | HTML, CSS, JS, imágenes                     | Respuestas dinámicas basadas en reglas de negocio  |
+| **Complejidad**               | Relativamente simples                       | Más complejos, requieren integración con servicios externos |
+| **Modelo clásico**            | Proxy inverso + archivos estáticos          | Monolítico (todo en un solo paquete)               |
+| **Modelo moderno**            | Proxy inverso + balanceo de carga           | Ligeros/embebidos + microservicios                 |
+| **Escalabilidad**             | Muy eficiente en concurrencia               | Escala mediante instancias adicionales             |
+| **Ejemplo de uso típico**     | Servir la web de un periódico               | Gestionar la lógica de un sistema bancario o de reservas |
+
+
+## 3. Virtualización
 - Tecnologías de virtualización en la nube.
 - Tecnologías de virtualización en contenedores.
 - Instalación y configuración básica.
 
-### Virtualización en la nube
+### 3.1 Introducción
 
 #### 1. Fundamentos de la Virtualización
 
@@ -691,10 +735,232 @@ El futuro continúa hacia mayor abstractación, seguridad nativa y integración 
 
 ### Documentación
 - Procesos de instalación y configuración realizados.
+### Documentación
+- Procesos de instalación y configuración realizados.
 
+#### 1. Importancia de la Documentación Técnica
+
+La documentación es un componente crítico en el despliegue y mantenimiento de aplicaciones web, ya que:
+
+- **Facilita la reproducibilidad** de los procesos de instalación y configuración
+- **Permite el onboarding** de nuevos miembros del equipo
+- **Sirve como referencia** para troubleshooting y auditorías
+- **Asegura la consistencia** entre entornos (desarrollo, staging, producción)
+- **Documenta decisiones técnicas** y justificaciones de configuración
+
+#### 2. Estructura Recomendada para Documentación Técnica
+
+##### 2.1. Documentación de Infraestructura
+documentacion/
+├── infraestructura/
+│ ├── diagramas-arquitectura/
+│ ├── especificaciones-servidores/
+│ ├── configuraciones-red/
+│ └── politicas-seguridad/
+
+
+##### 2.2. Documentación de Aplicación
+
+documentacion/
+├── aplicacion/
+│ ├── guia-instalacion.md
+│ ├── configuracion-entornos/
+│ ├── variables-entorno.md
+│ └── dependencias.md
+
+##### 2.3. Documentación Operativa
+
+documentacion/
+├── operaciones/
+│ ├── procedimientos-despliegue/
+│ ├── protocolos-monitorizacion/
+│ ├── planes-respuesta-incidencias/
+│ └── backups-recuperacion/
+
+#### 3. Plantilla para Documentación de Procesos de Instalación
+
+##### 3.1. Cabecera del Documento
+```markdown
+# Proceso de Instalación: [Nombre del Componente]
+
+**Versión:** [Versión del software]
+**Fecha:** [Fecha de la instalación]
+**Responsable:** [Nombre del técnico]
+**Estado:** [✅ Completado | ⏳ En progreso | ❌ Fallido]
+
+## Descripción General
+[Breve descripción del componente y su propósito]
+
+## Prerrequisitos
+
+### Requisitos de Hardware
+- **CPU:** [Requisitos de procesador]
+- **Memoria RAM:** [Requisitos de memoria]
+- **Almacenamiento:** [Requisitos de disco]
+
+### Requisitos de Software
+- **Sistema Operativo:** [Versión específica]
+- **Dependencias:** [Lista de paquetes requeridos]
+- **Versiones:** [Versiones específicas requeridas]
+
+### Requisitos de Red
+- **Puertos:** [Puertos que deben estar abiertos]
+- **Conectividad:** [Requisitos de conexión de red]
+
+## Procedimiento de Instalación
+
+### Paso 1: Preparación del Entorno
+```bash
+# Actualizar repositorios
+sudo apt update && sudo apt upgrade -y
+
+# Instalar dependencias del sistema
+sudo apt install -y curl wget git unzip
 ## Resultados de aprendizaje
 (Completar aquí)
 
 ## Criterios de evaluación
 (Completar aquí)
+```
+# 5. Documentación
 
+## 5.1. Introducción a la Documentación Técnica
+
+La documentación es una parte fundamental del proceso de implantación de arquitecturas web. Sirve como guía de referencia para el desarrollo, despliegue, mantenimiento y escalado de las aplicaciones. Una documentación adecuada facilita la colaboración entre equipos, acelera la resolución de problemas y garantiza la consistencia en los entornos de producción.
+
+## 5.2. Tipos de Documentación en la Implantación
+
+### 5.2.1. Documentación de Arquitectura
+Diagramas de infraestructura, topología de red, esquemas de despliegue y decisiones técnicas justificadas.
+
+### 5.2.2. Documentación de Configuración
+Archivos de configuración comentados, variables de entorno y parámetros específicos de cada entorno.
+
+### 5.2.3. Manuales de Procedimiento
+Guías paso a paso para despliegues, rollbacks, escalado y recuperación ante desastres.
+
+### 5.2.4. Documentación Operativa
+Procedimientos de monitorización, alertas y protocolos de actuación ante incidencias.
+
+## 5.3. Estructura de Documentación del Proyecto
+
+proyecto-web/
+├── 📁 docs/
+│   ├── 📄 00-indice.md
+│   ├── 📁 01-arquitectura/
+│   │   ├── 📄 diagrama-infraestructura.md
+│   │   ├── 📄 decisiones-tecnicas.md
+│   │   └── 📄 esquema-red.md
+│   ├── 📁 02-despliegue/
+│   │   ├── 📄 procedimiento-despliegue.md
+│   │   ├── 📄 rollback.md
+│   │   └── 📄 variables-entorno.md
+│   ├── 📁 03-configuracion/
+│   │   ├── 📄 servidor-web.md
+│   │   ├── 📄 base-datos.md
+│   │   └── 📄 servicios-externos.md
+│   ├── 📁 04-operaciones/
+│   │   ├── 📄 monitorizacion.md
+│   │   ├── 📄 backup.md
+│   │   └── 📄 escalado.md
+│   └── 📁 05-incidencias/
+│       ├── 📄 procedimiento-incidencias.md
+│       └── 📄 contactos-emergencia.md
+├── 📁 scripts/
+│   ├── 📄 deploy.sh
+│   ├── 📄 backup.sh
+│   └── 📄 health-check.sh
+├── 📁 config/
+│   ├── 📄 nginx.conf
+│   ├── 📄 database.yml
+│   └── 📄 .env.example
+└── 📁 diagramas/
+    ├── 📄 arquitectura.drawio
+    ├── 📄 flujo-datos.png
+    └── 📄 deployment.png
+## 5.4. Herramientas para Documentación
+
+### 5.4.1. Markdown
+Lenguaje de marcado ligero para documentación técnica. Fácil de aprender y ampliamente adoptado.
+
+### 5.4.2. Diagramas
+Herramientas como Draw.io, Lucidchart o PlantUML para crear diagramas de arquitectura y flujos.
+
+### 5.4.3. Swagger/OpenAPI
+Documentación automática de APIs RESTful con especificaciones estandarizadas.
+
+### 5.4.4. Wikis
+Confluence, GitHub Wiki o GitLab Wiki para documentación colaborativa y organizada.
+
+## 5.5. Contenido Mínimo de Documentación
+
+### 5.5.1. Especificaciones Técnicas
+Requisitos del sistema, versiones de software, dependencias y configuraciones necesarias.
+
+### 5.5.2. Guías de Instalación
+Procedimientos detallados para setup de entornos de desarrollo, testing y producción.
+
+### 5.5.3. Protocolos de Despliegue
+Instrucciones para despliegues manuales y automatizados, including CI/CD pipelines.
+
+### 5.5.4. Procedimientos de Mantenimiento
+Tareas periódicas, limpieza, optimización y actualizaciones de seguridad.
+
+## 5.6. Mejores Prácticas en Documentación
+
+### 5.6.1. Mantener la Documentación Actualizada
+La documentación debe evolucionar junto con el proyecto. Revisar y actualizar con cada release.
+
+### 5.6.2. Documentación como Código
+Tratar la documentación como parte del código fuente, versionándola y revisándola en PRs.
+
+### 5.6.3. Claridad y Concisión
+Usar lenguaje claro, ejemplos prácticos y evitar tecnicismos innecesarios.
+
+### 5.6.4. Validación con Pares
+Revisar la documentación con otros miembros del equipo para garantizar su comprensión.
+
+## 5.7. Ejemplo de Documentación de Despliegue
+
+```markdown
+# Procedimiento de Despliegue - v1.2.0
+
+## 📋 Prerrequisitos
+- Node.js 18.0+
+- PostgreSQL 14+
+- Redis 6.0+
+
+## 🚀 Despliegue en Producción
+
+### 1. Preparar Entorno
+```bash
+export NODE_ENV=production
+cp .env.example .env
+# Configurar variables en .env
+
+```
+
+## 5.8. Automatización de Documentación
+
+### 5.8.1. Generación Automática
+Usar herramientas que generen documentación a partir de comentarios en el código (JSDoc, PHPDoc).
+
+### 5.8.2. Integración en CI/CD
+Incluir validación de documentación en los pipelines de integración continua.
+
+### 5.8.3. Scripts de Actualización
+Crear scripts que automaticen la actualización de versiones y changelogs.
+
+## 5.9. Mantenimiento y Evolución
+
+### 5.9.1. Revisiones Periódicas
+Establecer ciclos de revisión de documentación cada sprint o release.
+
+### 5.9.2. Feedback Continuo
+Recoger feedback de los usuarios de la documentación para mejorarla continuamente.
+
+### 5.9.3. Métricas de Calidad
+Medir la utilidad de la documentación through encuestas y análisis de uso.
+
+
+ 

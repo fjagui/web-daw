@@ -11,6 +11,12 @@ theme:
     - content.code.copy
     - content.action.edit
 
+markdown_extensions:
+  - toc:
+      permalink: true   
+      toc_depth: 3
+  - attr_list
+
 nav:
   - Inicio: index.md
   - Unidad 1: 
