@@ -1,6 +1,5 @@
 # Implantación de arquitecturas web.
 ## 1. Arquitecturas web
-- Modelos, características, ventajas e inconvenientes.
 ### 1.1. Introducción.
 La arquitectura web es el esquema estructural y lógico que define cómo interactúan los diferentes componentes de una aplicación web (frontend, backend, bases de datos, servidores, etc.) para procesar una petición de usuario y entregar una respuesta.
 
@@ -175,6 +174,7 @@ Con el tiempo, el enfoque moderno evolucionó hacia una **separación de respons
 Esto hace que el término "servidor de aplicaciones" en su sentido clásico haya perdido protagonismo. Hoy se habla más de *application runtimes* o servidores ligeros embebidos.  
 
 En **Java**, todavía existen servidores tradicionales (WildFly, WebLogic), aunque muchas aplicaciones migraron a marcos como Spring Boot, que incluyen servidores embebidos (Tomcat, Jetty).  
+
 En **Python, PHP o Node.js**, el modelo predominante es un proceso de aplicación acompañado de un servidor web que actúa como proxy inverso.  
 
 En resumen, los **servidores de aplicaciones no han desaparecido**, pero ya no se usan como piezas centralizadas y monolíticas, sino como parte de arquitecturas más distribuidas y flexibles.  
@@ -265,702 +265,309 @@ En la actualidad, los servidores de aplicaciones tienden a ser más ligeros y mo
 | **Ejemplo de uso típico**     | Servir la web de un periódico               | Gestionar la lógica de un sistema bancario o de reservas |
 
 
-## 3. Virtualización
-- Tecnologías de virtualización en la nube.
-- Tecnologías de virtualización en contenedores.
-- Instalación y configuración básica.
-
-### 3.1 Introducción
-
-#### 1. Fundamentos de la Virtualización
-
-##### 1.1. Concepto y Definición
-La virtualización es una tecnología que permite crear versiones virtuales de recursos físicos de computación, como servidores, almacenamiento, redes y dispositivos. Esta capa de abstracción posibilita:
-
-- Ejecutar múltiples sistemas operativos simultáneamente en un mismo hardware físico
-- Aislar entornos de ejecución entre diferentes aplicaciones
-- Optimizar la utilización de recursos hardware
-- Facilitar la portabilidad y migración de cargas de trabajo
-
-##### 1.2. Componentes Clave de la Virtualización
-- **Hypervisor (VMM - Virtual Machine Monitor)**: Software que crea y ejecuta máquinas virtuales
-- **Máquina Virtual (VM)**: Entorno aislado que emula un sistema físico completo
-- **Host**: Máquina física que aloja el hypervisor y las VMs
-- **Guest**: Sistema operativo invitado que se ejecuta dentro de una VM
-- **Recursos Virtualizados**: CPU, memoria, almacenamiento y red asignados a las VMs
-
-#### 2. Tipos de Virtualización
-
-##### 2.1. Virtualización de Servidores
-**Virtualización Completa (Type 1 - Bare Metal):**
-- Hypervisor instalado directamente sobre el hardware físico
-- Ejemplos: VMware ESXi, Microsoft Hyper-V, Xen, KVM
-- Mayor rendimiento y eficiencia
-- Ideal para entornos productivos y empresariales
-
-**Virtualización Hospedada (Type 2 - Hosted):**
-- Hypervisor ejecutado sobre un sistema operativo host
-- Ejemplos: VMware Workstation, Oracle VirtualBox, Parallels
-- Mayor facilidad de uso y configuración
-- Adecuado para desarrollo, testing y entornos desktop
-
-##### 2.2. Virtualización de Containers
-- **Contenedores**: Entornos ligeros que comparten el kernel del sistema operativo host
-- **Docker**: Plataforma estándar para creación y gestión de contenedores
-- **Kubernetes**: Sistema de orquestación de contenedores
-- Ventajas: Mayor eficiencia, rápido despliegue y escalado automático
-
-##### 2.3. Otras Formas de Virtualización
-- **Virtualización de Red**: VLANs, redes definidas por software (SDN)
-- **Virtualización de Almacenamiento**: SAN virtual, almacenamiento definido por software
-- **Virtualización de Escritorios**: VDI (Virtual Desktop Infrastructure)
-
-#### 3. Tecnologías de Hypervisor Principales
-
-##### 3.1. VMware vSphere/ESXi
-**Características:**
-- Hypervisor tipo 1 de alto rendimiento
-- Suite completa de herramientas de gestión (vCenter)
-- Funciones avanzadas: vMotion, HA, DRS
-- Amplio ecosistema de partners y compatibilidad
-
-**Ventajas:**
-- Estabilidad y madurez empresarial
-- Herramientas avanzadas de gestión
-- Buen soporte técnico y documentación
-
-##### 3.2. Microsoft Hyper-V
-**Características:**
-- Hypervisor tipo 1 integrado en Windows Server
-- Gestión mediante Windows Admin Center o System Center
-- Integración con ecosistema Microsoft
-- Licenciamiento incluido con Windows Server
-
-**Ventajas:**
-- Coste cero para entornos Windows existentes
-- Buena integración con Active Directory
-- Fácil gestión para administradores Windows
-
-##### 3.3. KVM (Kernel-based Virtual Machine)
-**Características:**
-- Hypervisor tipo 1 integrado en el kernel Linux
-- Solución open-source totalmente gratuita
-- Gestión mediante libvirt, virt-manager, oVirt
-- Alto rendimiento y escalabilidad
-
-**Ventajas:**
-- Coste cero de licencias
-- Alto rendimiento cercano al metal
-- Flexibilidad total de configuración
-
-##### 3.4. Comparativa de Hypervisores
-| Característica | VMware ESXi | Hyper-V | KVM |
-|----------------|-------------|---------|-----|
-| Tipo | Type 1 | Type 1 | Type 1 |
-| Coste licencia | Alto | Medio (gratis con WS) | Gratuito |
-| Rendimiento | Excelente | Muy bueno | Excelente |
-| Facilidad uso | Alta | Media-Alta | Media |
-| Soporte empresarial | Excelente | Muy bueno | Bueno (comercial) |
-
-#### 4. Virtualización en Entornos Cloud
-
-##### 4.1. Modelos de Servicio Cloud
-**IaaS (Infrastructure as a Service):**
-- Infraestructura virtualizada completa (VMs, redes, almacenamiento)
-- Control total sobre el sistema operativo y aplicaciones
-- Ejemplos: AWS EC2, Azure Virtual Machines, Google Compute Engine
-
-**PaaS (Platform as a Service):**
-- Plataforma de ejecución para aplicaciones
-- Sin gestión de infraestructura subyacente
-- Ejemplos: Heroku, Google App Engine, Azure App Service
-
-**SaaS (Software as a Service):**
-- Aplicaciones completas en la nube
-- Sin gestión de infraestructura ni plataforma
-- Ejemplos: Office 365, Salesforce, Gmail
-
-##### 4.2. Principales Proveedores Cloud
-
-**Amazon Web Services (AWS):**
-- Líder del mercado en servicios cloud
-- Amplia gama de servicios (más de 200)
-- EC2 para máquinas virtuales, ECS/EKS para contenedores
-- Modelo de precios bajo demanda
-
-**Microsoft Azure:**
-- Integración perfecta con productos Microsoft
-- Azure Virtual Machines, Azure Kubernetes Service
-- Fuertes capacidades híbridas con Azure Stack
-- Licenciamiento flexible para entornos Microsoft
-
-**Google Cloud Platform (GCP):**
-- Fortalezas en big data y machine learning
-- Google Compute Engine, Google Kubernetes Engine
-- Red global de alto rendimiento
-- Precios competitivos y descuentos por uso sostenido
-
-#### 5. Implementación Práctica de Virtualización
-
-##### 5.1. Creación de Máquinas Virtuales
-**Parámetros de Configuración:**
-- Asignación de recursos CPU y memoria
-- Configuración de discos virtuales (tipo, tamaño, formato)
-- Configuración de red (NAT, bridge, host-only)
-- Dispositivos virtuales (CD-ROM, USB, gráficos)
-
-**Consideraciones de Rendimiento:**
-- Overallocation controlada de recursos
-- Alineación de discos virtuales
-- Drivers optimizados para el hypervisor
-- Configuración adecuada de cache y buffers
-
-##### 5.2. Herramientas de Gestión
-**Interfaces Gráficas:**
-- VMware vSphere Client
-- Hyper-V Manager
-- virt-manager (KVM)
-- Oracle VM VirtualBox Manager
-
-**Interfaces de Línea de Comando:**
-- VMware ESXi CLI
-- Hyper-V PowerShell
-- virsh (KVM)
-- Vagrant para gestión declarativa
-
-**Plataformas de Gestión:**
-- VMware vCenter
-- Microsoft System Center
-- oVirt/RHEV
-- OpenStack
-
-#### 6. Consideraciones de Seguridad en Virtualización
-
-##### 6.1. Mejores Prácticas de Seguridad
-- **Aislamiento**: Garantizar separación entre VMs
-- **Hardening**: Configuración segura del hypervisor
-- **Parches**: Mantener actualizado el hypervisor y VMs
-- **Backup**: Estrategias de backup específicas para entornos virtualizados
-- **Monitorización**: Detección de anomalías y comportamientos sospechosos
-
-##### 6.2. Aspectos Específicos de Seguridad
-- **VM Escape**: Prevención de escapes desde guest al host
-- **Seguridad de la red virtual**: Configuración adecuada de VLANs y firewalls
-- **Gestión de secretos**: Almacenamiento seguro de credenciales
-- **Auditoría**: Logs y monitorización de actividad
-
-#### 7. Ventajas y Desventajas de la Virtualización
-
-##### 7.1. Ventajas Principales
-- **Optimización de recursos**: Mayor utilización del hardware
-- **Flexibilidad**: Rápido aprovisionamiento y escalado
-- **Disponibilidad**: Alta disponibilidad y recuperación ante desastres
-- **Aislamiento**: Separación de entornos y aplicaciones
-- **Ahorro de costes**: Reducción de hardware físico y energía
-
-##### 7.2. Desventajas y Consideraciones
-- **Complejidad**: Curva de aprendizaje y gestión
-- **Rendimiento**: Overhead por la capa de virtualización
-- **Coste licencias**: Software y herramientas de gestión
-- **Dependencia vendor**: Lock-in con tecnologías específicas
-- **Seguridad**: Nuevos vectores de ataque específicos
-
-#### 8. Tendencias y Futuro de la Virtualización
-
-##### 8.1. Evolución Tecnológica
-- **Containers y Kubernetes**: Mayor adopción de contenedores
-- **Serverless Computing**: Abstractación completa de la infraestructura
-- **Edge Computing**: Virtualización en entornos distribuidos
-- **GPU Virtualization**: Virtualización de aceleradores hardware
-
-##### 8.2. Tecnologías Emergentes
-- **MicroVMs**: Máquinas virtuales ultraligeras (Firecracker)
-- **Service Mesh**: Gestión avanzada de comunicaciones entre servicios
-- **GitOps**: Gestión declarativa de infraestructura
-- **Multi-cloud**: Gestión unificada de múltiples nubes
-
-#### 9. Casos de Uso y Aplicaciones Prácticas
-
-##### 9.1. Entornos de Desarrollo y Testing
-- Entornos aislados y reproducibles
-- Snapshots para testing de diferentes escenarios
-- Templates para rápido aprovisionamiento
-
-##### 9.2. Producción y Empresa
-- Consolidación de servidores físicos
-- Alta disponibilidad y balanceo de carga
-- Recuperación ante desastres y backup
-- Escalabilidad elástica según demanda
-
-##### 9.3. Educación y Laboratorios
-- Entornos de aprendizaje aislados
-- Laboratorios virtuales complejos
-- Democratización del acceso a infraestructura
-
-#### 10. Conclusión
-
-La virtualización en la nube representa la base fundamental de la computación moderna, permitiendo:
-
-- Optimización radical del uso de recursos hardware
-- Flexibilidad sin precedentes en el aprovisionamiento de infraestructura
-- Capacidades avanzadas de alta disponibilidad y recuperación
-- Transición hacia modelos cloud y hybrid cloud
-
-La elección de la tecnología de virtualización adecuada depende de múltiples factores: requisitos técnicos, presupuesto, habilidades del equipo, y estrategia cloud a largo plazo. El futuro continúa hacia mayor abstractación, automatización y eficiencia en la gestión de recursos computacionales.
-
-### Tecnologías de virtualización de contenedores
-
-#### 1. Fundamentos de la Virtualización por Contenedores
-
-##### 1.1. Concepto y Definición
-La virtualización por contenedores es una tecnología de virtualización a nivel de sistema operativo que permite ejecutar múltiples instancias aisladas de aplicaciones (contenedores) compartiendo un mismo kernel del sistema operativo host.
-
-**Características principales:**
-- Aislamiento de procesos mediante namespaces
-- Control de recursos mediante cgroups
-- Imágenes inmutables y portables
-- Arranque rápido y menor overhead que las VMs
-
-##### 1.2. Diferencias con Virtualización Tradicional
-| Aspecto | Virtualización Tradicional | Contenedores |
-|---------|----------------------------|--------------|
-| Nivel de abstractación | Hardware | Sistema operativo |
-| Tamaño | GBs | MBs |
-| Tiempo de inicio | Minutos | Segundos |
-| Overhead | Alto (10-20%) | Bajo (1-5%) |
-| Aislamiento | Completo (VM) | Procesos (OS) |
-
-#### 2. Arquitectura de Contenedores
-
-##### 2.1. Componentes Fundamentales
-- **Container Engine**: Software que gestiona el ciclo de vida de contenedores
-- **Imágenes**: Plantillas read-only que contienen la aplicación y sus dependencias
-- **Contenedores**: Instancias ejecutables de las imágenes
-- **Registry**: Repositorio para almacenar y distribuir imágenes
-- **Orquestador**: Sistema para gestionar múltiples contenedores
-
-##### 2.2. Namespaces y Cgroups
-**Namespaces (Aislamiento):**
-- PID: Aislamiento de procesos
-- Network: Redes aisladas
-- Mount: Sistemas de archivos independientes
-- UTS: Hostname y domain name aislados
-- IPC: Comunicación entre procesos aislada
-- User: UIDs y GIDs aislados
-
-**Cgroups (Control de recursos):**
-- CPU: Límites de uso de procesador
-- Memory: Límites de memoria RAM
-- I/O: Control de acceso a disco
-- Network: Ancho de banda de red
-
-#### 3. Tecnologías Principales de Contenedores
-
-##### 3.1. Docker
-**Arquitectura Docker:**
-- Docker Daemon: Servicio principal
-- Docker Client: Interfaz de línea de comandos
-- Docker Images: Plantillas de contenedores
-- Docker Registry: Docker Hub y registros privados
-
-**Componentes clave:**
-- Dockerfile: Script para construir imágenes
-- Docker Compose: Orquestación de múltiples contenedores
-- Docker Swarm: Orquestación nativa de Docker
-
-##### 3.2. Containerd
-- Runtime de contenedores de bajo nivel
-- Parte del proyecto CNCF (Cloud Native Computing Foundation)
-- Base para Docker y Kubernetes
-- API más simple y enfocada en la ejecución básica
-
-##### 3.3. Podman
-- Alternativa a Docker sin daemon
-- Rootless containers (ejecución sin privilegios root)
-- Compatible con Docker CLI
-- Arquitectura sin daemon centralizado
-
-##### 3.4. Comparativa de Tecnologías
-| Tecnología | Empresa | Daemon | Rootless | Kubernetes Integration |
-|------------|---------|---------|----------|-----------------------|
-| Docker | Docker, Inc. | Sí | Parcial | Excelente |
-| Containerd | CNCF | Sí | Sí | Nativa |
-| Podman | Red Hat | No | Sí | Buena |
-
-#### 4. Orquestación de Contenedores
-
-##### 4.1. Kubernetes
-**Arquitectura Kubernetes:**
-- **Control Plane**: etcd, API Server, Controller Manager, Scheduler
-- **Nodes**: kubelet, kube-proxy, container runtime
-- **Pods**: Unidad mínima de despliegue (1+ contenedores)
-- **Services**: Abstración de acceso a aplicaciones
-
-**Conceptos clave:**
-- Deployments: Gestión de aplicaciones stateless
-- StatefulSets: Aplicaciones con estado
-- ConfigMaps y Secrets: Configuración y datos sensibles
-- Ingress: Gestión de tráfico entrante
-
-##### 4.2. Docker Swarm
-- Orquestación nativa de Docker
-- Más simple que Kubernetes
-- Integración transparente con ecosistema Docker
-- Adecuado para entornos pequeños y medianos
-
-##### 4.3. OpenShift
-- Plataforma empresarial basada en Kubernetes
-- Funcionalidades adicionales de seguridad y CI/CD
-- Interfaz web robusta y herramientas de desarrollo
-- Soporte empresarial de Red Hat
-
-#### 5. Desarrollo y Construcción de Contenedores
-
-##### 5.1. Dockerfile y Best Practices
-
-### Aplicaciones web
-- Estructura y recursos que las componen.
-### 6. Seguridad en Contenedores
-
-#### 6.1. Mejores Prácticas de Seguridad
-
-- **Imágenes minimalistas**: Usar imágenes base pequeñas (alpine, distroless)
-- **Escaneo de vulnerabilidades**: Tools like Trivy, Grype, Snyk
-- **Non-root execution**: Ejecutar contenedores sin privilegios root
-- **Read-only filesystems**: Montar sistemas de archivos como read-only
-- **Resource limits**: Establecer límites de CPU y memoria
-
-#### 6.2. Herramientas de Seguridad
-
-- **Falco**: Detección de comportamientos anómalos
-- **Notary**: Firma digital de imágenes
-- **Aqua Security**: Plataforma completa de seguridad
-- **Sysdig**: Monitorización y seguridad
-
-### 7. Networking y Almacenamiento
-
-#### 7.1. Modelos de Networking
-
-- **Bridge network**: Red interna por defecto
-- **Host network**: Compartir networking del host
-- **Overlay network**: Redes multi-host (Docker Swarm, Kubernetes)
-- **Macvlan**: Asignar dirección MAC directa
-
-#### 7.2. Soluciones de Almacenamiento
-
-- **Volumes**: Almacenamiento gestionado por Docker
-- **Bind mounts**: Montar directorios del host
-- **tmpfs mounts**: Almacenamiento en memoria
-- **Storage plugins**: Integración con sistemas externos
-
-### 8. Monitorización y Logging
-
-#### 8.1. Herramientas de Monitorización
-
-- **cAdvisor**: Monitorización de recursos de contenedores
-- **Prometheus**: Sistema de monitorización y alerting
-- **Grafana**: Dashboards de visualización
-- **Datadog**: Plataforma SaaS de monitorización
-
-#### 8.2. Estrategias de Logging
-
-- **Driver de logs**: json-file, journald, syslog, fluentd
-- **ELK Stack**: Elasticsearch, Logstash, Kibana
-- **Loki**: Sistema de logging de Grafana
-- **Fluentd**: Colector de logs unificado
-
-### 9. Integración Continua y Despliegue
-
-#### 9.1. CI/CD con Contenedores
-
-- **GitHub Actions**: Automatización de builds y tests
-- **GitLab CI**: Pipelines integradas con container registry
-- **Jenkins**: Automatización con pipelines declarativas
-- **ArgoCD**: GitOps para Kubernetes
-
-#### 9.2. Estrategias de Despliegue
-
-- **Blue-Green**: Dos entornos idénticos
-- **Canary Releases**: Despliegue progresivo
-- **Rolling Updates**: Actualización gradual
-- **A/B Testing**: Variantes para diferentes usuarios
-
-### 10. Tendencias y Futuro
-
-#### 10.1. Tecnologías Emergentes
-
-- **WebAssembly (Wasm)**: Ejecución portable y segura
-- **eBPF**: Programabilidad del kernel para networking y seguridad
-- **Serverless Containers**: Abstractación completa de la infraestructura
-- **GitOps**: Gestión declarativa basada en Git
-
-#### 10.2. Evolución del Ecosistema
-
-- Mayor adopción de containerd y CRI-O
-- Crecimiento de plataformas serverless basadas en containers
-- Integración con service mesh (Istio, Linkerd)
-- Avances en seguridad con hardware TPM y confidential computing
-
-### 11. Casos de Uso y Aplicaciones
-
-#### 11.1. Microservicios
-
-- Descomposición de aplicaciones monolíticas
-- Independencia en desarrollo y despliegue
-- Escalabilidad granular por servicio
-
-#### 11.2. DevOps y CI/CD
-
-- Entornos consistentes de desarrollo a producción
-- Builds reproducibles y versionados
-- Automatización de testing y despliegue
-
-#### 11.3. Machine Learning
-
-- Empaquetado de modelos y dependencias
-- Reproducibilidad de experimentos
-- Escalabilidad de inferencia
-
-### 12. Conclusión
-
-La virtualización por contenedores ha revolucionado el desarrollo y despliegue de aplicaciones mediante:
-
-- **Portabilidad**: Ejecución consistente en cualquier entorno
-- **Eficiencia**: Mayor densidad de aplicaciones por recurso
-- **Velocidad**: Desarrollo ágil y despliegues rápidos
-- **Ecosistema**: Herramientas maduras y estándares abiertos
-
-El futuro continúa hacia mayor abstractación, seguridad nativa y integración con cloud native technologies, manteniendo los principios de inmutabilidad, declaratividad y automatización que han hecho exitosa esta tecnología.
-
-
-### Documentación
-- Procesos de instalación y configuración realizados.
-### Documentación
-- Procesos de instalación y configuración realizados.
-
-#### 1. Importancia de la Documentación Técnica
+## 3. Virtualización.
+### 3.1. Introducción.
+La virtualización es una tecnología que permite crear versiones virtuales de recursos físicos de computación, como servidores, almacenamiento, redes y dispositivos. Esta capa de abstracción posibilita:  
+
+- Ejecutar múltiples sistemas operativos simultáneamente en un mismo hardware físico.  
+- Aislar entornos de ejecución entre diferentes aplicaciones.  
+- Optimizar la utilización de recursos hardware.  
+- Facilitar la portabilidad y migración de cargas de trabajo.  
+
+### 3.2. Virtualización Tradicional (Hypervisores)
+#### Componentes.
+- Hypervisor (VMM - Virtual Machine Monitor): Software que crea y ejecuta máquinas virtuales.  
+- Máquina Virtual (VM): Entorno aislado que emula un sistema físico completo.  
+- Host: Máquina física que aloja el hypervisor y las VMs.  
+- Guest: Sistema operativo invitado que se ejecuta dentro de una VM.  
+- Recursos Virtualizados: CPU, memoria, almacenamiento y red asignados a las VMs.  
+
+#### Tipos de Virtualización de Servidores.
+
+- **Virtualización Completa (Type 1 - Bare Metal)**:
+    - Hypervisor instalado directamente sobre el hardware físico.
+    - Ejemplos: VMware ESXi, Microsoft Hyper-V, Xen, KVM.
+    - Mayor rendimiento y eficiencia. Ideal para entornos productivos y empresariales.
+
+- **Virtualización Hospedada (Type 2 - Hosted)**:
+    - Hypervisor ejecutado sobre un sistema operativo host.
+    - Ejemplos: VMware Workstation, Oracle VirtualBox, Parallels.
+    - Mayor facilidad de uso y configuración. Adecuado para desarrollo, testing y entornos desktop.
+
+- **Otras Formas de Virtualización:**
+    - Virtualización de Red: VLANs, redes definidas por software (SDN).
+    - Virtualización de Almacenamiento: SAN virtual, almacenamiento definido por software.  
+    - Virtualización de Escritorios: VDI (Virtual Desktop Infrastructure).
+
+#### Principales Tecnologías de Hypervisor.
+- **VMware vSphere/ESXi:**
+    - Hypervisor tipo 1 de alto rendimiento. Suite completa de gestión (vCenter).
+    - Ventajas: Estabilidad empresarial, herramientas avanzadas, excelente soporte.
+- **Microsoft Hyper-V:**
+    - Hypervisor tipo 1 integrado en Windows Server.
+    - Ventajas: Coste cero para entornos Windows, integración con Active Directory.
+- **KVM (Kernel-based Virtual Machine):**
+    - Hypervisor tipo 1 integrado en el kernel Linux. Open-source y gratuito.
+    - Ventajas: Coste cero, alto rendimiento, flexibilidad total.
+
+#### Comparativa de Hypervisores
+
+| Característica       | VMware ESXi         | Hyper-V                  | KVM                     |
+|----------------------|---------------------|--------------------------|-------------------------|
+| **Tipo**             | Type 1              | Type 1                   | Type 1                  |
+| **Coste licencia**   | Alto                | Medio (gratis con WS)    | Gratuito                |
+| **Rendimiento**      | Excelente           | Muy bueno                | Excelente               |
+| **Facilidad uso**    | Alta                | Media-Alta               | Media                   |
+| **Soporte empresarial** | Excelente        | Muy bueno                | Bueno (comercial)       |
+
+#### Virtualización en la Nube
+- **Modelos de Servicio Cloud:**
+    - **IaaS** (Infrastructure as a Service): Infraestructura virtualizada completa (Ej: AWS EC2, Azure VMs).
+    - **PaaS** (Platform as a Service): Plataforma de ejecución para aplicaciones (Ej: Heroku, Google App Engine).
+    - **SaaS** (Software as a Service): Aplicaciones completas en la nube (Ej: Office 365, Gmail).
+    - Principales **Proveedores Cloud**: Amazon Web Services (AWS), Microsoft Azure, Google Cloud Platform (GCP).
+
+- **Ventajas:**
+    - Optimización de recursos.
+    - Flexibilidad.
+    - Alta disponibilidad.
+    - Aislamiento.
+    - Ahorro de costes.
+- **Inconvenientes:**
+    - Complejidad.
+    - Overhead de rendimiento.
+    - Coste de licencias.
+    - Dependencia del vendor o vendor lock-in. Es una situación en la que un cliente se ve atado a un proveedor de productos o servicios, haciendo que sea difícil o costoso cambiar a otro, debido a la tecnología propietaria, los altos costes de migración, o la integración profunda con un único proveedor.
+
+- **Casos de Uso:**
+    - Consolidación de servidores.  
+    - Entornos de desarrollo y testing.  
+    - Laboratorios educativos.  
+    - Alta disponibilidad.  
+
+### 3.3. Virtualización por Contenedores
+Tecnología de virtualización a nivel de sistema operativo que permite ejecutar múltiples instancias aisladas de aplicaciones compartiendo el kernel del host.  
+
+Las diferencias fundamentales con las VMs son:  
+
+- Nivel de abstractación: Sistema operativo (no hardware).
+- Menor tamaño.
+- Tiempo de inicio inferior.
+- Overhead bajo. Los proyectos tienen costos operativos indirectos y generales mínimos o reducidos.
+ 
+#### Plataformas de Virtualización
+
+- Soluciones especializadas en contenedores:
+    - **Docker**: Estándar del mercado, mayor ecosistema.
+    - **Containerd**: Runtime de bajo nivel para Kubernetes.  
+    - **Podman**: Alternativa sin daemon, mayor seguridad.
+
+- Plataformas Híbridas (Contenedores + VMs)
+    - **Proxmox VE**: Plataforma de virtualización integral
+        - Soporte nativo para contenedores LXC y máquinas virtuales.
+        - Gestión unificada mediante interfaz web integrada
+        - Ideal para entornos híbridos, infraestructuras on-premise (Departamento de Informática),laboratorios y entornos de testing,...
+    
+
+#### Arquitectura Básica
+- Componentes Clave:
+    - **Container Engine**: Gestiona ciclo de vida del contenedor (Docker, Containerd).
+    - **Imágenes**: Plantillas read-only con aplicación y dependencias.
+    - **Registry**: Repositorio de imágenes (Docker Hub, registros privados).
+    - **Orquestador**: Gestión múltiple (Kubernetes, Docker Swarm).
+
+#### Orquestación
+La orquestación es la automatización de las operaciones de despliegue, gestión, escalado y networking de contenedores. Es el proceso que permite administrar múltiples contenedores que trabajan juntos como una aplicación completa.  
+
+- **Kubernetes (K8s)**
+    - Estándar de facto para producción
+    - Arquitectura: Control Plane + Nodes
+    - Conceptos: Pods, Services, Deployments
+
+- **Docker Swarm**
+    - Orquestación nativa de Docker
+    - Más simple que Kubernetes
+    - Adecuado para pequeños entornos
+
+#### Casos de Uso por Plataforma
+- **Docker/Podman**  
+    - Desarrollo local y aplicaciones simples
+    - Microservicios
+    - CI/CD pipelines
+
+- **Kubernetes**
+    - Producción enterprise.
+    - Aplicaciones distribuidas.
+    - Escalabilidad automática.
+
+- **Proxmox VE**
+    - Infraestructuras híbridas.
+    - Entornos de laboratorio.
+    - Host para clusters Kubernetes.
+---
+La virtualización, tanto tradicional como por contenedores, es la base fundamental de la computación moderna y en la nube.  
+la virtualización tradicional (Hypervisores) proporciona aislamiento completo y es ideal para ejecutar sistemas operativos heterogéneos y cargas de trabajo legacy, optimizando radicalmente el uso del hardware físico.  
+La virtualización por contenedores ofrece una mayor eficiencia, portabilidad y velocidad para aplicaciones modernas, basadas en microservicios y prácticas DevOps.
+
+La elección entre una u otra, o una combinación de ambas (entornos híbridos), depende de los requisitos técnicos específicos, el presupuesto, las habilidades del equipo y la estrategia tecnológica a largo plazo. El futuro continúa hacia una mayor abstractación, automatización y eficiencia en la gestión de recursos.
+
+
+## 4. Documentación
+### 4.1. Introducción.
 
 La documentación es un componente crítico en el despliegue y mantenimiento de aplicaciones web, ya que:
 
-- **Facilita la reproducibilidad** de los procesos de instalación y configuración
+- **Facilita la reproducibilidad** de los procesos de instalación y configuración.
 - **Permite el onboarding** de nuevos miembros del equipo
-- **Sirve como referencia** para troubleshooting y auditorías
-- **Asegura la consistencia** entre entornos (desarrollo, staging, producción)
-- **Documenta decisiones técnicas** y justificaciones de configuración
+- **Sirve como referencia** para troubleshooting y auditorías.
+- **Asegura la consistencia** entre entornos (desarrollo, staging, producción).
+- **Documenta decisiones técnicas** y justificaciones de configuración.
 
-#### 2. Estructura Recomendada para Documentación Técnica
+### 4.2. Tipos de Documentación.
 
-##### 2.1. Documentación de Infraestructura
-documentacion/
-├── infraestructura/
-│ ├── diagramas-arquitectura/
-│ ├── especificaciones-servidores/
-│ ├── configuraciones-red/
-│ └── politicas-seguridad/
-
-
-##### 2.2. Documentación de Aplicación
-
-documentacion/
-├── aplicacion/
-│ ├── guia-instalacion.md
-│ ├── configuracion-entornos/
-│ ├── variables-entorno.md
-│ └── dependencias.md
-
-##### 2.3. Documentación Operativa
-
-documentacion/
-├── operaciones/
-│ ├── procedimientos-despliegue/
-│ ├── protocolos-monitorizacion/
-│ ├── planes-respuesta-incidencias/
-│ └── backups-recuperacion/
-
-#### 3. Plantilla para Documentación de Procesos de Instalación
-
-##### 3.1. Cabecera del Documento
-```markdown
-# Proceso de Instalación: [Nombre del Componente]
-
-**Versión:** [Versión del software]
-**Fecha:** [Fecha de la instalación]
-**Responsable:** [Nombre del técnico]
-**Estado:** [✅ Completado | ⏳ En progreso | ❌ Fallido]
-
-## Descripción General
-[Breve descripción del componente y su propósito]
-
-## Prerrequisitos
-
-### Requisitos de Hardware
-- **CPU:** [Requisitos de procesador]
-- **Memoria RAM:** [Requisitos de memoria]
-- **Almacenamiento:** [Requisitos de disco]
-
-### Requisitos de Software
-- **Sistema Operativo:** [Versión específica]
-- **Dependencias:** [Lista de paquetes requeridos]
-- **Versiones:** [Versiones específicas requeridas]
-
-### Requisitos de Red
-- **Puertos:** [Puertos que deben estar abiertos]
-- **Conectividad:** [Requisitos de conexión de red]
-
-## Procedimiento de Instalación
-
-### Paso 1: Preparación del Entorno
-```bash
-# Actualizar repositorios
-sudo apt update && sudo apt upgrade -y
-
-# Instalar dependencias del sistema
-sudo apt install -y curl wget git unzip
-## Resultados de aprendizaje
-(Completar aquí)
-
-## Criterios de evaluación
-(Completar aquí)
-```
-# 5. Documentación
-
-## 5.1. Introducción a la Documentación Técnica
-
-La documentación es una parte fundamental del proceso de implantación de arquitecturas web. Sirve como guía de referencia para el desarrollo, despliegue, mantenimiento y escalado de las aplicaciones. Una documentación adecuada facilita la colaboración entre equipos, acelera la resolución de problemas y garantiza la consistencia en los entornos de producción.
-
-## 5.2. Tipos de Documentación en la Implantación
-
-### 5.2.1. Documentación de Arquitectura
-Diagramas de infraestructura, topología de red, esquemas de despliegue y decisiones técnicas justificadas.
-
-### 5.2.2. Documentación de Configuración
-Archivos de configuración comentados, variables de entorno y parámetros específicos de cada entorno.
-
-### 5.2.3. Manuales de Procedimiento
-Guías paso a paso para despliegues, rollbacks, escalado y recuperación ante desastres.
-
-### 5.2.4. Documentación Operativa
-Procedimientos de monitorización, alertas y protocolos de actuación ante incidencias.
-
-## 5.3. Estructura de Documentación del Proyecto
-
-proyecto-web/
-├── 📁 docs/
-│   ├── 📄 00-indice.md
-│   ├── 📁 01-arquitectura/
-│   │   ├── 📄 diagrama-infraestructura.md
-│   │   ├── 📄 decisiones-tecnicas.md
-│   │   └── 📄 esquema-red.md
-│   ├── 📁 02-despliegue/
-│   │   ├── 📄 procedimiento-despliegue.md
-│   │   ├── 📄 rollback.md
-│   │   └── 📄 variables-entorno.md
-│   ├── 📁 03-configuracion/
-│   │   ├── 📄 servidor-web.md
-│   │   ├── 📄 base-datos.md
-│   │   └── 📄 servicios-externos.md
-│   ├── 📁 04-operaciones/
-│   │   ├── 📄 monitorizacion.md
-│   │   ├── 📄 backup.md
-│   │   └── 📄 escalado.md
-│   └── 📁 05-incidencias/
-│       ├── 📄 procedimiento-incidencias.md
-│       └── 📄 contactos-emergencia.md
-├── 📁 scripts/
-│   ├── 📄 deploy.sh
-│   ├── 📄 backup.sh
-│   └── 📄 health-check.sh
-├── 📁 config/
-│   ├── 📄 nginx.conf
-│   ├── 📄 database.yml
-│   └── 📄 .env.example
-└── 📁 diagramas/
-    ├── 📄 arquitectura.drawio
-    ├── 📄 flujo-datos.png
-    └── 📄 deployment.png
-## 5.4. Herramientas para Documentación
-
-### 5.4.1. Markdown
-Lenguaje de marcado ligero para documentación técnica. Fácil de aprender y ampliamente adoptado.
-
-### 5.4.2. Diagramas
-Herramientas como Draw.io, Lucidchart o PlantUML para crear diagramas de arquitectura y flujos.
-
-### 5.4.3. Swagger/OpenAPI
-Documentación automática de APIs RESTful con especificaciones estandarizadas.
-
-### 5.4.4. Wikis
-Confluence, GitHub Wiki o GitLab Wiki para documentación colaborativa y organizada.
-
-## 5.5. Contenido Mínimo de Documentación
-
-### 5.5.1. Especificaciones Técnicas
-Requisitos del sistema, versiones de software, dependencias y configuraciones necesarias.
-
-### 5.5.2. Guías de Instalación
-Procedimientos detallados para setup de entornos de desarrollo, testing y producción.
-
-### 5.5.3. Protocolos de Despliegue
-Instrucciones para despliegues manuales y automatizados, including CI/CD pipelines.
-
-### 5.5.4. Procedimientos de Mantenimiento
-Tareas periódicas, limpieza, optimización y actualizaciones de seguridad.
-
-## 5.6. Mejores Prácticas en Documentación
-
-### 5.6.1. Mantener la Documentación Actualizada
-La documentación debe evolucionar junto con el proyecto. Revisar y actualizar con cada release.
-
-### 5.6.2. Documentación como Código
-Tratar la documentación como parte del código fuente, versionándola y revisándola en PRs.
-
-### 5.6.3. Claridad y Concisión
-Usar lenguaje claro, ejemplos prácticos y evitar tecnicismos innecesarios.
-
-### 5.6.4. Validación con Pares
-Revisar la documentación con otros miembros del equipo para garantizar su comprensión.
-
-## 5.7. Ejemplo de Documentación de Despliegue
-
-```markdown
-# Procedimiento de Despliegue - v1.2.0
-
-## 📋 Prerrequisitos
-- Node.js 18.0+
-- PostgreSQL 14+
-- Redis 6.0+
-
-## 🚀 Despliegue en Producción
-
-### 1. Preparar Entorno
-```bash
-export NODE_ENV=production
-cp .env.example .env
-# Configurar variables en .env
+#### Documentación de Infraestructura
+Esta documentación proporciona una visión completa de la infraestructura tecnológica, incluyendo arquitectura, especificaciones técnicas, configuraciones de red y políticas de seguridad. Sirve como fuente de referencia única para el equipo técnico y garantiza la consistencia en la gestión de sistemas.
 
 ```
+documentacion/
+└── 📁 infraestructura/
+    ├── 📁 diagramas-arquitectura/
+    │   ├── 📄 arquitectura-sistema-v1.0.pdf
+    │   ├── 📄 diagrama-red-topologia.drawio
+    │   ├── 📄 flujo-datos.json
+    │   └── 📄 despliegue-produccion.pptx
+    │
+    ├── 📁 especificaciones-servidores/
+    │   ├── 📄 inventario-hardware.xlsx
+    │   ├── 📄 specs-servidores-fisicos.md
+    │   ├── 📄 config-vmware-esxi.txt
+    │   └── 📄 almacenamiento-san.pdf
+    │
+    ├── 📁 configuraciones-red/
+    │   ├── 📄 config-router-principal.backup
+    │   ├── 📄 esquema-ip-vlan.xlsx
+    │   ├── 📄 reglas-firewall.csv
+    │   └── 📄 dns-records.txt
+    │
+    └── 📁 politicas-seguridad/
+        ├── 📄 politica-acceso.md
+        ├── 📄 hardening-baseline.conf
+        ├── 📄 respuesta-incidentes.pdf
+        ├── 📄 compliance-pci-dss.docx
+        └── 📄 backup-policy-v2.1.md
+```
+#### Documentación de Aplicación
+Esta documentación proporciona información completa sobre el desarrollo, funcionamiento y mantenimiento de las aplicaciones. Sirve como guía de referencia para desarrolladores, QA y equipos de operaciones, facilitando el ciclo de vida completo del software.
 
-## 5.8. Automatización de Documentación
+```
+documentacion/
+└── 📁 aplicacion/
+    ├── 📁 desarrollo/
+    │   ├── 📁 arquitectura/
+    │   ├── 📁 codigo-fuente/
+    │   ├── 📁 decisiones-tecnicas/
+    │   └── 📁 guias-estilo/
+    │
+    ├── 📁 pruebas/
+    │   ├── 📁 casos-prueba/
+    │   ├── 📁 resultados/
+    │   ├── 📁 automatizacion/
+    │   └── 📁 rendimiento/
+    │
+    ├── 📁 despliegue/
+    │   ├── 📁 entornos/
+    │   ├── 📁 configuraciones/
+    │   ├── 📁 scripts/
+    │   └── 📁 pipelines/
+    │
+    ├── 📁 operacion/
+    │   ├── 📁 monitoreo/
+    │   ├── 📁 procedimientos/
+    │   ├── 📁 incidentes/
+    │   └── 📁 backup/
+    │
+    └── 📁 manuales/
+        ├── 📁 usuario-final/
+        ├── 📁 administrador/
+        ├── 📁 tecnico/
+        └── 📁 api/
+```
+#### Documentación Operativa
+Esta documentación proporciona procedimientos y guías para la operación diaria de sistemas y servicios. Está diseñada para garantizar la continuidad operacional, estandarizar procedimientos y facilitar la resolución eficiente de incidencias.
 
-### 5.8.1. Generación Automática
-Usar herramientas que generen documentación a partir de comentarios en el código (JSDoc, PHPDoc).
+```
+documentacion/
+└── 📁 operativa/
+    ├── 📁 procedimientos-diarios/
+    │   ├── 📁 checklist/
+    │   ├── 📁 turnos/
+    │   ├── 📁 reportes/
+    │   └── 📁 handover/
+    │
+    ├── 📁 monitoreo/
+    │   ├── 📁 alertas/
+    │   ├── 📁 dashboards/
+    │   ├── 📁 metricas/
+    │   └── 📁 thresholds/
+    │
+    ├── 📁 incidentes/
+    │   ├── 📁 runbooks/
+    │   ├── 📁 escalamientos/
+    │   ├── 📁 resolucion/
+    │   └── 📁 postmortem/
+    │
+    ├── 📁 cambios/
+    │   ├── 📁 procedimientos/
+    │   ├── 📁 ventanas/
+    │   ├── 📁 rollback/
+    │   └── 📁 aprobaciones/
+    │
+    └── 📁 comunicacion/
+        ├── 📁 notificaciones/
+        ├── 📁 contactos/
+        ├── 📁 on-call/
+        └── 📁 escalamiento/
+```
+### 4.3. Plantillas y automatización
 
-### 5.8.2. Integración en CI/CD
-Incluir validación de documentación en los pipelines de integración continua.
+Diseñar un protocolo de documentación basado en plantillas y procesos automatizados garantiza la consistencia, completitud y calidad en todos los materiales generados, facilitando su creación y mantenimiento. Este enfoque no solo mejora la documentación técnica dirigida a desarrolladores y administradores, sino también la destinada a usuarios finales y responsables operativos.
 
-### 5.8.3. Scripts de Actualización
-Crear scripts que automaticen la actualización de versiones y changelogs.
+Buenas prácticas:
 
-## 5.9. Mantenimiento y Evolución
+- **Trabajar con plantillas suficientemente descriptivas**: definir apartados mínimos como requisitos, instalación, configuración, arquitectura, incidencias conocidas y referencias, asegurando que no se omita información crítica.  
+- **Usar herramientas que generen documentación a partir de comentarios en el código** (JSDoc, PHPDoc, entre otras): esto reduce el esfuerzo manual y mantiene sincronizada la documentación técnica con la implementación real.  
+- **Incluir validación de documentación en los pipelines de integración continua**: integrar comprobaciones automáticas sobre formato, coherencia y existencia de documentación en cada versión publicada.  
+- **Crear scripts que automaticen la actualización de versiones y changelogs**: mantener un registro histórico claro de cambios, correcciones y nuevas funcionalidades.  
+- **Recoger feedback de los usuarios de la documentación**: tanto usuarios finales como técnicos deben poder aportar mejoras y señalar carencias.  
+- **Medir la utilidad de la documentación mediante encuestas y análisis de uso**: identificar apartados más consultados y detectar lagunas informativas.  
+- **Publicar la documentación en formatos accesibles y centralizados**: portales web, wikis internas, repositorios vinculados al código o manuales descargables en PDF, de forma que siempre exista una referencia única y actualizada.  
+- **Mantener un estilo uniforme en el lenguaje y la estructura**: unificar redacción, terminología y formato visual para transmitir claridad y profesionalidad.  
 
-### 5.9.1. Revisiones Periódicas
-Establecer ciclos de revisión de documentación cada sprint o release.
+Elementos recomendados en las plantillas de documentación:
 
-### 5.9.2. Feedback Continuo
-Recoger feedback de los usuarios de la documentación para mejorarla continuamente.
+- **Documentación técnica**:  
+    - Descripción del proyecto y responsables.  
+    - Requisitos de hardware, software y dependencias.  
+    - Procedimientos de instalación y despliegue en distintos entornos.  
+    - Arquitectura del sistema y diagramas de referencia.  
+    - Variables de configuración, parámetros y personalización.  
+    - Registro de cambios (changelog).  
+    - Troubleshooting y resolución de incidencias frecuentes.  
 
-### 5.9.3. Métricas de Calidad
-Medir la utilidad de la documentación through encuestas y análisis de uso.
+- **Guías operativas**:  
+    - Procedimientos de monitorización y mantenimiento rutinario.  
+    - Políticas de copias de seguridad y recuperación ante fallos.  
+    - Escalamiento de incidencias y responsables de soporte.  
+    - Buenas prácticas de seguridad y cumplimiento normativo.  
+
+- **Manuales de usuario**:  
+    - Introducción al sistema y objetivos principales.  
+    - Instrucciones paso a paso para tareas comunes.  
+    - Capturas, diagramas o ejemplos ilustrativos.  
+    - Preguntas frecuentes (FAQ).  
+    - Contactos o canales de soporte.  
+
+La combinación de plantillas y automatización fomenta una **cultura de documentación continua** que acompaña al ciclo de vida de la aplicación. De este modo, se cubren de forma integral las necesidades de desarrolladores, administradores y usuarios finales, asegurando que cada perfil disponga de la información necesaria en el momento oportuno.
 
 
  
