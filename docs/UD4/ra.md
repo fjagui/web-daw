@@ -1,39 +1,18 @@
-# Soluciones - # Servidores de transferencia de archivos
+---
+hide:
+  - toc
+---
 
-## Contenidos básicos agrupados
+# Servicios de transferencia de archivos.
+### Resultado de aprendizaje.
+**RA4.** Administra servidores de transferencia de archivos, evaluando y aplicando criterios de configuración que garanticen la disponibilidad del servicio..  
+### Criterios de evaluación.  
+a) Se han instalado y configurado servidores de transferencia de archivos.  
+b) Se han creado usuarios y grupos para el acceso remoto al servidor.  
+c) Se ha comprobado el acceso al servidor, tanto en modo activo como en modo pasivo.  
+d) Se han realizado pruebas con clientes en línea de comandos y clientes en modo gráfico.  
+e) Se ha utilizado el protocolo seguro de transferencia de archivos.  
+f) Se han configurado y utilizado servicios de transferencia de archivos integrados en servidores web.  
+g) Se ha elaborado documentación relativa a la configuración y administración del servicio de transferencia de archivos.  
+h) Se han utilizado tecnologías de virtualización en el despliegue de servidores de transferencia de archivos en la nube y en contenedores.  
 
-### Instalación y configuración
-- Servidores de transferencia de archivos.
-- Permisos y cuotas.
-- Usuarios y accesos.
-
-### Conexiones
-- Modos de conexión: activo y pasivo.
-- Clientes: en línea de comandos y gráficos.
-
-### Seguridad
-- Protocolos seguros de transferencia de archivos (SFTP/FTPS).
-- Servicios de transferencia integrados en servidores web.
-
-### Despliegue
-- Uso en el despliegue de aplicaciones web.
-- Virtualización en la nube y contenedores.
-
-### Documentación
-- Configuración y administración del servicio.
-
-## Resultados de aprendizaje
-(Completar aquí)
-
-## Criterios de evaluación
-(Completar aquí)
-
-
-## Soluciones a prácticas guiadas
-(Completar aquí las soluciones de prácticas guiadas)
-
-## Soluciones a prácticas por completar
-(Completar aquí las soluciones de prácticas semi-guiadas)
-
-## Soluciones a prácticas libres
-(Completar aquí las soluciones de prácticas libres)
