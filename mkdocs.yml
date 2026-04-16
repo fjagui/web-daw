@@ -44,10 +44,10 @@ nav:
       - Teoría: UD4/index.md
       - Actividades: UD4/practicas.md
       - RA y CE: UD4/ra.md
-#   - Unidad 5: 
-#       - Teoría: UD5/index.md
-#       - Actividades: UD5/practicas.md
-#       - RA y CE: UD5/ra.md
+  - Unidad 5: 
+      - Teoría: UD5/index.md
+      - Actividades: UD5/practicas.md
+      - RA y CE: UD5/ra.md
 #   - Unidad 6: 
 #       - Teoría: UD6/index.md
 #       - Actividades: UD6/practicas.md
